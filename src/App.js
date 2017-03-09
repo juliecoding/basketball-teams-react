@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
 import List from './List';
 import logo from './logo.svg';
 import './App.css';
@@ -6,13 +7,6 @@ import './App.css';
 class App extends Component {
   constructor(props) {
     super(props)
-
-    this.state = {
-      players: {
-        benched: ['griffin', 'pierce', 'crawford'],
-        onCourt: ['paul', 'redick', 'rivers']
-      }
-    }
 
     this.moveToBench = this.moveToBench.bind(this);
     this.moveToCourt = this.moveToCourt.bind(this);
@@ -54,13 +48,17 @@ class App extends Component {
           <h2>Welcome to React</h2>
         </div>
         <List title="On Court" handleClick={this.moveToBench}
-        list={this.state.players.onCourt} />
+        list={this.props.players.onCourt} />
         <List title="Benched" handleClick={this.moveToCourt}
-        list={this.state.players.benched} />
-        
+        list={this.props.players.benched} />
+
       </div>
     );
   }
 }
 
-export default App;
+  function mapStateToProps(state) {
+    return state;
+  }
+
+export default connect(mapStateToProps)(App);

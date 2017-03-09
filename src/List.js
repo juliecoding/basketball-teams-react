@@ -1,4 +1,5 @@
 import React from 'react';
+import store from './store'
 import './List.css';
 
 export default function Bench(props) {
@@ -10,8 +11,15 @@ export default function Bench(props) {
    * 3. list {Array<string>} a list of strings to be displayed.
    */
 
+   function handleClick(player) {
+     store.dispatch({
+       type: 'player/SEND_PLAYER_TO_COURT',
+       payload: player
+     })
+   }
+
   var list = props.list.map((item, i) => {
-    return <li key={i} onClick={props.handleClick.bind(null, item, i)}>{item}</li>
+    return <li key={i} onClick={handleClick.bind(null, item)} > {item}</li>
   })
   return (
     <div className="list">
